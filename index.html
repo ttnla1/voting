@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="vi"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vote Teaser</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@500;700;900&family=Dancing+Script:wght@700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #1a0808;
+  display: flex; justify-content: center; align-items: center; min-height: 100vh;
+}
+.story {
+  width: 390px; height: 844px;
+  position: relative; overflow: hidden;
+  background: #fdf6f0; font-family: 'Montserrat', sans-serif;
+}
+.bg-pattern {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(180,30,30,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(180,30,30,0.05) 0%, transparent 60%),
+    #fdf6f0;
+}
+.bg-dots {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(180,30,30,0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ── TOP ── */
+.top-section {
+  position: relative; z-index: 10;
+  padding: 40px 28px 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 9px;
+}
+.alert-badge {
+  display: flex; align-items: center; gap: 7px;
+  background: #c0392b; color: #fff;
+  font-size: 10px; font-weight: 900; letter-spacing: 2.5px;
+  text-transform: uppercase; padding: 6px 16px; border-radius: 20px;
+  animation: badgePop 2s ease-in-out infinite;
+}
+@keyframes badgePop {
+  0%,100% { box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(192,57,43,0); }
+}
+.alert-dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.main-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px; font-weight: 700; font-style: italic;
+  color: #7a2020; text-align: center; line-height: 1.15;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 0 rgba(192,57,43,0.15);
+}
+.class-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 3.5px;
+  color: #7a2020; text-transform: uppercase; text-align: center;
+}
+.ornament-top { width: 100%; display: flex; align-items: center; gap: 8px; }
+.orn-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #c0392b, transparent); }
+.orn-diamond { width: 7px; height: 7px; background: #c0392b; transform: rotate(45deg); flex-shrink: 0; }
+
+/* ── CERT CARD ── */
+.cert-wrapper { position: relative; z-index: 10; margin: 6px 20px 0; }
+.cert-outer {
+  border: 2.5px solid #c0392b; border-radius: 3px;
+  padding: 12px; position: relative; background: #fff9f6;
+}
+.corner { position: absolute; width: 14px; height: 14px; }
+.corner::before, .corner::after { content: ''; position: absolute; background: #c0392b; }
+.corner::before { width: 100%; height: 2px; top: 0; left: 0; }
+.corner::after  { width: 2px; height: 100%; top: 0; left: 0; }
+.c-tl { top: -2px; left: -2px; }
+.c-tr { top: -2px; right: -2px; transform: scaleX(-1); }
+.c-bl { bottom: -2px; left: -2px; transform: scaleY(-1); }
+.c-br { bottom: -2px; right: -2px; transform: scale(-1,-1); }
+
+.cert-inner {
+  border: 1px solid rgba(192,57,43,0.30); border-radius: 1px;
+  padding: 14px 18px 16px;
+  position: relative; display: flex; flex-direction: column; align-items: center;
+  min-height: 440px;
+}
+.floral { position: absolute; width: 58px; height: 58px; opacity: 0.40; }
+.floral-tl { top: 2px; left: 2px; }
+.floral-tr { top: 2px; right: 2px; transform: scaleX(-1); }
+.floral-bl { bottom: 2px; left: 2px; transform: scaleY(-1); }
+.floral-br { bottom: 2px; right: 2px; transform: scale(-1,-1); }
+
+.cert-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px; font-weight: 700; letter-spacing: 3px;
+  color: #7a2020; text-align: center; margin-top: 18px;
+  position: relative; z-index: 2;
+}
+.cert-line { width: 78%; height: 1px; background: rgba(192,57,43,0.28); margin: 8px auto; }
+.cert-intro {
+  font-size: 10px; color: rgba(122,32,32,0.65);
+  font-style: italic; margin-bottom: 4px; position: relative; z-index: 2;
+}
+
+/* BLURRED ZONE */
+.blurred-name-zone {
+  position: relative; width: 100%;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 10px; padding: 10px 0 14px; z-index: 2;
+}
+.title-blur {
+  font-size: 10px; font-weight: 800; letter-spacing: 4px;
+  color: #7a2020; filter: blur(5px);
+  user-select: none; opacity: 0.7; text-transform: uppercase;
+}
+.name-blur {
+  font-family: 'Dancing Script', cursive;
+  font-size: 44px; color: #7a2020;
+  filter: blur(7px); user-select: none; letter-spacing: 6px; opacity: 0.72;
+}
+.reason-blur-block { width: 82%; display: flex; flex-direction: column; gap: 7px; align-items: center; }
+.reason-line { height: 7px; border-radius: 4px; background: rgba(122,32,32,0.16); filter: blur(3px); }
+.reason-line.w100 { width: 100%; }
+.reason-line.w70  { width: 70%; }
+.lock-badge {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,249,246,0.88); backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(192,57,43,0.25); border-radius: 50%;
+  width: 50px; height: 50px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; box-shadow: 0 4px 18px rgba(192,57,43,0.12);
+  animation: lockFloat 3s ease-in-out infinite; z-index: 5;
+}
+@keyframes lockFloat {
+  0%,100% { transform: translate(-50%,-50%) scale(1); }
+  50%      { transform: translate(-50%,-56%) scale(1.06); }
+}
+
+.cert-bottom {
+  width: 100%; display: flex; justify-content: flex-end;
+  align-items: flex-end; padding: 0 4px; gap: 10px;
+  margin-top: auto; position: relative; z-index: 2;
+}
+.council-text {
+  font-size: 7.5px; font-weight: 800; letter-spacing: 1.5px;
+  color: rgba(122,32,32,0.45); text-align: right;
+  text-transform: uppercase; line-height: 1.6; margin-bottom: 4px;
+}
+
+/* ── LOGO STAMP ── */
+.stamp-wrap {
+  width: 72px; height: 72px;
+  transform: rotate(-10deg); flex-shrink: 0;
+}
+
+/* ── BOTTOM ── */
+.bottom-section {
+  position: relative; z-index: 10;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 14px 24px 34px;
+}
+.ornament-mid { width: 100%; display: flex; align-items: center; gap: 8px; }
+.teaser-line {
+  font-family: 'Dancing Script', cursive;
+  font-size: 16px; color: rgba(122,32,32,0.72);
+  text-align: center; line-height: 1.6;
+}
+.countdown-box {
+  background: linear-gradient(135deg, #c0392b 0%, #8e1a0e 100%);
+  border-radius: 14px; padding: 16px 24px;
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  box-shadow: 0 8px 28px rgba(192,57,43,0.32); width: 100%;
+}
+.countdown-label { font-size: 9.5px; font-weight: 700; letter-spacing: 3px; color: rgba(255,255,255,0.65); text-transform: uppercase; }
+.countdown-time { display: flex; align-items: center; gap: 2px; }
+.cd-block { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.cd-num {
+  font-family: 'Playfair Display', serif; font-size: 46px; font-weight: 700; color: #fff;
+  line-height: 1; min-width: 62px; text-align: center; text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+.cd-unit { font-size: 7.5px; font-weight: 700; letter-spacing: 2.5px; color: rgba(255,255,255,0.55); text-transform: uppercase; }
+.cd-sep { font-family: 'Playfair Display', serif; font-size: 42px; color: rgba(255,255,255,0.45); margin-bottom: 14px; animation: blink 1s step-end infinite; }
+.midnight-tag { background: rgba(255,255,255,0.13); border-radius: 20px; padding: 5px 14px; }
+.midnight-tag span { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.88); letter-spacing: 1.5px; }
+.bottom-orn { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+.bottom-orn-text { font-size: 9px; color: rgba(122,32,32,0.45); letter-spacing: 4px; text-transform: uppercase; font-weight: 700; }
+</style>
+<script src="/_sdk/resizing_sdk.js"></script></head>
+<body data-html-import-id="html-import-0" data-template-id="__page-root" style="background: rgb(26, 8, 8);">
+<div class="story canva-container" data-html-import-id="html-import-1" data-template-id="div-0" style="background: rgb(253, 246, 240); font-family: Montserrat;">
+  <div class="bg-pattern canva-container" data-html-import-id="html-import-2" data-template-id="div-1" style="background: rgb(253, 246, 240);"></div>
+  <div class="bg-dots" data-html-import-id="html-import-3"></div>
+
+  <div class="top-section" data-html-import-id="html-import-4">
+    <div class="alert-badge canva-container" data-html-import-id="html-import-5" data-template-id="div-2" style="background: rgb(192, 57, 43); color: rgb(255, 255, 255); font-weight: 900; font-size: 10px;"><div class="alert-dot canva-container" data-html-import-id="html-import-6" data-template-id="div-3" style="background: rgb(255, 255, 255);"></div><canva-inline-text data-template-id="canva-inline-text-4" class="canva-text" style="color: rgb(255, 255, 255); font-weight: 900; font-size: 10px;">SẮP MỞ BÌNH CHỌN</canva-inline-text></div>
+    <div class="main-title canva-container" data-html-import-id="html-import-7" data-template-id="div-5" style="font-family: &quot;Playfair Display&quot;; font-weight: 700; font-style: italic; font-size: 30px;">tụi tui's
+choice awards</div>
+    <div class="class-title canva-container" data-html-import-id="html-import-9" data-template-id="div-6" style="color: rgb(122, 32, 32); font-family: &quot;Playfair Display&quot;; font-weight: 700; font-size: 12px;">11A1 · THPT NK 24'27</div>
+    <div class="ornament-top" data-html-import-id="html-import-10">
+      <div class="orn-line" data-html-import-id="html-import-11"></div><div class="orn-diamond canva-container" data-html-import-id="html-import-12" data-template-id="div-7" style="background: rgb(192, 57, 43);"></div><div class="orn-line" data-html-import-id="html-import-13"></div>
+    </div>
+  </div>
+
+  <div class="cert-wrapper" data-html-import-id="html-import-14">
+    <div class="cert-outer canva-container" data-html-import-id="html-import-15" data-template-id="div-8" style="background: rgb(255, 249, 246);">
+      <div class="corner c-tl" data-html-import-id="html-import-16"></div><div class="corner c-tr" data-html-import-id="html-import-17"></div>
+      <div class="corner c-bl" data-html-import-id="html-import-18"></div><div class="corner c-br" data-html-import-id="html-import-19"></div>
+
+      <svg class="floral floral-tl" viewBox="0 0 60 60" fill="none" data-html-import-id="html-import-20">
+        <path d="M4 56 C4 4 4 4 56 4" stroke="#c0392b" stroke-width="1.4" data-html-import-id="html-import-21"></path>
+        <path d="M4 56 C8 34 22 18 40 10" stroke="#c0392b" stroke-width="0.9" data-html-import-id="html-import-22"></path>
+        <path d="M4 56 C14 40 28 26 50 18" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="1.5,3" data-html-import-id="html-import-23"></path>
+        <circle cx="7" cy="52" r="2.5" fill="none" stroke="#c0392b" stroke-width="1" data-html-import-id="html-import-24"></circle>
+        <circle cx="52" cy="7" r="2.5" fill="none" stroke="#c0392b" stroke-width="1" data-html-import-id="html-import-25"></circle>
+        <circle cx="30" cy="28" r="1.5" fill="#c0392b" opacity="0.4" data-html-import-id="html-import-26"></circle>
+        <path d="M16 44 Q22 36 30 28 Q38 20 46 14" stroke="#c0392b" stroke-width="0.7" data-html-import-id="html-import-27"></path>
+      </svg>
+      <svg class="floral floral-tr" viewBox="0 0 60 60" fill="none" data-html-import-id="html-import-28">
+        <path d="M4 56 C4 4 4 4 56 4" stroke="#c0392b" stroke-width="1.4" data-html-import-id="html-import-29"></path>
+        <path d="M4 56 C8 34 22 18 40 10" stroke="#c0392b" stroke-width="0.9" data-html-import-id="html-import-30"></path>
+        <path d="M4 56 C14 40 28 26 50 18" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="1.5,3" data-html-import-id="html-import-31"></path>
+        <circle cx="7" cy="52" r="2.5" fill="none" stroke="#c0392b" stroke-width="1" data-html-import-id="html-import-32"></circle>
+        <circle cx="52" cy="7" r="2.5" fill="none" stroke="#c0392b" stroke-width="1" data-html-import-id="html-import-33"></circle>
+        <circle cx="30" cy="28" r="1.5" fill="#c0392b" opacity="0.4" data-html-import-id="html-import-34"></circle>
+        <path d="M16 44 Q22 36 30 28 Q38 20 46 14" stroke="#c0392b" stroke-width="0.7" data-html-import-id="html-import-35"></path>
+      </svg>
+      <svg class="floral floral-bl" viewBox="0 0 60 60" fill="none" data-html-import-id="html-import-36">
+        <path d="M4 56 C4 4 4 4 56 4" stroke="#c0392b" stroke-width="1.4" data-html-import-id="html-import-37"></path>
+        <path d="M4 56 C8 34 22 18 40 10" stroke="#c0392b" stroke-width="0.9" data-html-import-id="html-import-38"></path>
+        <path d="M4 56 C14 40 28 26 50 18" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="1.5,3" data-html-import-id="html-import-39"></path>
+        <circle cx="7" cy="52" r="2.5" fill="none" stroke="#c0392b" stroke-width="1" data-html-import-id="html-import-40"></circle>
+        <circle cx="52" cy="7" r="2.5" fill="none" stroke="#c0392b" stroke-width="1" data-html-import-id="html-import-41"></circle>
+        <circle cx="30" cy="28" r="1.5" fill="#c0392b" opacity="0.4" data-html-import-id="html-import-42"></circle>
+        <path d="M16 44 Q22 36 30 28 Q38 20 46 14" stroke="#c0392b" stroke-width="0.7" data-html-import-id="html-import-43"></path>
+      </svg>
+      <svg class="floral floral-br" viewBox="0 0 60 60" fill="none" data-html-import-id="html-import-44">
+        <path d="M4 56 C4 4 4 4 56 4" stroke="#c0392b" stroke-width="1.4" data-html-import-id="html-import-45"></path>
+        <path d="M4 56 C8 34 22 18 40 10" stroke="#c0392b" stroke-width="0.9" data-html-import-id="html-import-46"></path>
+        <path d="M4 56 C14 40 28 26 50 18" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="1.5,3" data-html-import-id="html-import-47"></path>
+        <circle cx="7" cy="52" r="2.5" fill="none" stroke="#c0392b" stroke-width="1" data-html-import-id="html-import-48"></circle>
+        <circle cx="52" cy="7" r="2.5" fill="none" stroke="#c0392b" stroke-width="1" data-html-import-id="html-import-49"></circle>
+        <circle cx="30" cy="28" r="1.5" fill="#c0392b" opacity="0.4" data-html-import-id="html-import-50"></circle>
+        <path d="M16 44 Q22 36 30 28 Q38 20 46 14" stroke="#c0392b" stroke-width="0.7" data-html-import-id="html-import-51"></path>
+      </svg>
+
+      <div class="cert-inner" data-html-import-id="html-import-52">
+        <div class="cert-header canva-container" data-html-import-id="html-import-53" data-template-id="div-9" style="color: rgb(122, 32, 32); font-family: &quot;Playfair Display&quot;; font-weight: 700; font-size: 19px;">GIẤY CHỨNG NHẬN</div>
+        <div class="cert-line canva-container" data-html-import-id="html-import-54" data-template-id="div-10" style="background: rgba(192, 57, 43, 0.28);"></div>
+        <div class="cert-intro canva-container" data-html-import-id="html-import-55" data-template-id="div-11" style="color: rgba(122, 32, 32, 0.65); font-style: italic; font-size: 10px;">Xin chúc mừng chủ nhân của danh hiệu:</div>
+
+        <div class="blurred-name-zone" data-html-import-id="html-import-56">
+          <div class="title-blur canva-container" data-html-import-id="html-import-57" data-template-id="div-12" style="color: rgb(122, 32, 32); font-weight: 800; font-size: 10px;">✦ ░░░░░░░░░░░░ ✦</div>
+          <div class="name-blur canva-container" data-html-import-id="html-import-58" data-template-id="div-13" style="color: rgb(122, 32, 32); font-family: &quot;Dancing Script&quot;; font-size: 44px;">ꫀ ༄ ℘ ꩜ ✦</div>
+          <div class="cert-line canva-container" style="width: 55%; margin: 0px; background: rgba(192, 57, 43, 0.28);" data-html-import-id="html-import-59" data-template-id="div-14"></div>
+          <div class="reason-blur-block" data-html-import-id="html-import-60">
+            <div class="reason-line w100 canva-container" data-html-import-id="html-import-61" data-template-id="div-15" style="background: rgba(122, 32, 32, 0.16);"></div>
+            <div class="reason-line w70 canva-container" data-html-import-id="html-import-62" data-template-id="div-16" style="background: rgba(122, 32, 32, 0.16);"></div>
+          </div>
+          <div class="lock-badge canva-container" data-html-import-id="html-import-63" data-template-id="div-17" style="background: rgba(255, 249, 246, 0.88); color: rgb(0, 0, 0); font-size: 22px;">🔒</div>
+        </div>
+
+        <div class="cert-line canva-container" style="margin-top: auto; background: rgba(192, 57, 43, 0.28);" data-html-import-id="html-import-64" data-template-id="div-18"></div>
+
+        <div class="cert-bottom" data-html-import-id="html-import-65">
+          <div class="council-text canva-container" data-html-import-id="html-import-66" data-template-id="div-19" style="color: rgba(122, 32, 32, 0.45); font-weight: 800; font-size: 8px;">Hội Đồng
+Trao Giải</div>
+
+          <!-- LOGO 11A1 THPT NK — globe + Saturn ring + stars -->
+          <div class="stamp-wrap" data-html-import-id="html-import-68">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" width="72" height="72" data-html-import-id="html-import-69">
+              <!-- ── Globe body ── -->
+              <!-- latitude lines -->
+              <circle cx="50" cy="50" r="28" stroke="#c0392b" stroke-width="1.3" opacity="0.7" data-html-import-id="html-import-70"></circle>
+              <!-- equator -->
+              <ellipse cx="50" cy="50" rx="28" ry="7" stroke="#c0392b" stroke-width="1" opacity="0.55" data-html-import-id="html-import-71"></ellipse>
+              <!-- upper latitude -->
+              <ellipse cx="50" cy="38" rx="22" ry="5.5" stroke="#c0392b" stroke-width="0.8" opacity="0.45" data-html-import-id="html-import-72"></ellipse>
+              <!-- lower latitude -->
+              <ellipse cx="50" cy="62" rx="22" ry="5.5" stroke="#c0392b" stroke-width="0.8" opacity="0.45" data-html-import-id="html-import-73"></ellipse>
+              <!-- vertical meridians -->
+              <ellipse cx="50" cy="50" rx="10" ry="28" stroke="#c0392b" stroke-width="0.9" opacity="0.5" data-html-import-id="html-import-74"></ellipse>
+              <ellipse cx="50" cy="50" rx="20" ry="28" stroke="#c0392b" stroke-width="0.7" opacity="0.35" data-html-import-id="html-import-75"></ellipse>
+              <!-- central vertical line -->
+              <line x1="50" y1="22" x2="50" y2="78" stroke="#c0392b" stroke-width="0.9" opacity="0.5" data-html-import-id="html-import-76"></line>
+              <!-- central horizontal line -->
+              <line x1="22" y1="50" x2="78" y2="50" stroke="#c0392b" stroke-width="0.9" opacity="0.5" data-html-import-id="html-import-77"></line>
+
+              <!-- ── Saturn ring (ellipse tilted, going BEHIND then IN FRONT of globe) ── -->
+              <!-- back half of ring (behind globe) -->
+              <ellipse cx="50" cy="54" rx="40" ry="12" stroke="#c0392b" stroke-width="2" opacity="0.5" stroke-dasharray="62.8 125.6" stroke-dashoffset="0" data-html-import-id="html-import-78"></ellipse>
+              <!-- front half of ring (in front of globe) -->
+              <ellipse cx="50" cy="54" rx="40" ry="12" stroke="#c0392b" stroke-width="2.2" opacity="0.8" stroke-dasharray="62.8 125.6" stroke-dashoffset="-62.8" data-html-import-id="html-import-79"></ellipse>
+
+              <!-- ── Stars (4 sparkles) ── -->
+              <!-- top star -->
+              <g transform="translate(50,16)" data-html-import-id="html-import-80">
+                <line x1="0" y1="-4" x2="0" y2="4" stroke="#c0392b" stroke-width="1.5" opacity="0.8" data-html-import-id="html-import-81"></line>
+                <line x1="-4" y1="0" x2="4" y2="0" stroke="#c0392b" stroke-width="1.5" opacity="0.8" data-html-import-id="html-import-82"></line>
+                <line x1="-2.5" y1="-2.5" x2="2.5" y2="2.5" stroke="#c0392b" stroke-width="0.8" opacity="0.5" data-html-import-id="html-import-83"></line>
+                <line x1="2.5" y1="-2.5" x2="-2.5" y2="2.5" stroke="#c0392b" stroke-width="0.8" opacity="0.5" data-html-import-id="html-import-84"></line>
+              </g>
+              <!-- bottom star -->
+              <g transform="translate(50,84)" data-html-import-id="html-import-85">
+                <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="#c0392b" stroke-width="1.5" opacity="0.8" data-html-import-id="html-import-86"></line>
+                <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="#c0392b" stroke-width="1.5" opacity="0.8" data-html-import-id="html-import-87"></line>
+                <line x1="-2" y1="-2" x2="2" y2="2" stroke="#c0392b" stroke-width="0.8" opacity="0.5" data-html-import-id="html-import-88"></line>
+                <line x1="2" y1="-2" x2="-2" y2="2" stroke="#c0392b" stroke-width="0.8" opacity="0.5" data-html-import-id="html-import-89"></line>
+              </g>
+              <!-- left star -->
+              <g transform="translate(14,62)" data-html-import-id="html-import-90">
+                <line x1="0" y1="-3" x2="0" y2="3" stroke="#c0392b" stroke-width="1.3" opacity="0.7" data-html-import-id="html-import-91"></line>
+                <line x1="-3" y1="0" x2="3" y2="0" stroke="#c0392b" stroke-width="1.3" opacity="0.7" data-html-import-id="html-import-92"></line>
+                <line x1="-1.8" y1="-1.8" x2="1.8" y2="1.8" stroke="#c0392b" stroke-width="0.7" opacity="0.45" data-html-import-id="html-import-93"></line>
+                <line x1="1.8" y1="-1.8" x2="-1.8" y2="1.8" stroke="#c0392b" stroke-width="0.7" opacity="0.45" data-html-import-id="html-import-94"></line>
+              </g>
+              <!-- right star -->
+              <g transform="translate(86,62)" data-html-import-id="html-import-95">
+                <line x1="0" y1="-3" x2="0" y2="3" stroke="#c0392b" stroke-width="1.3" opacity="0.7" data-html-import-id="html-import-96"></line>
+                <line x1="-3" y1="0" x2="3" y2="0" stroke="#c0392b" stroke-width="1.3" opacity="0.7" data-html-import-id="html-import-97"></line>
+                <line x1="-1.8" y1="-1.8" x2="1.8" y2="1.8" stroke="#c0392b" stroke-width="0.7" opacity="0.45" data-html-import-id="html-import-98"></line>
+                <line x1="1.8" y1="-1.8" x2="-1.8" y2="1.8" stroke="#c0392b" stroke-width="0.7" opacity="0.45" data-html-import-id="html-import-99"></line>
+              </g>
+
+              <!-- ── Text: 11A1 ── -->
+              <text x="50" y="54" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="900" letter-spacing="1" fill="#c0392b" opacity="0.85" font-family="Montserrat,sans-serif" style="font-style:italic" data-html-import-id="html-import-100">11A1</text>
+
+              <!-- ── Text: THPT NK 24'27 ── -->
+              <text x="50" y="65" text-anchor="middle" font-size="6.5" font-weight="800" letter-spacing="0.8" fill="#c0392b" opacity="0.75" font-family="Montserrat,sans-serif" data-html-import-id="html-import-101">THPT NK 24'27</text>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-section" data-html-import-id="html-import-102">
+    <div class="ornament-mid" data-html-import-id="html-import-103">
+      <div class="orn-line" data-html-import-id="html-import-104"></div><div class="orn-diamond canva-container" data-html-import-id="html-import-105" data-template-id="div-20" style="background: rgb(192, 57, 43);"></div><div class="orn-line" data-html-import-id="html-import-106"></div>
+    </div>
+    <div class="teaser-line canva-container" data-html-import-id="html-import-107" data-template-id="div-21" style="color: rgba(122, 32, 32, 0.72); font-family: &quot;Dancing Script&quot;; font-size: 16px;"><canva-inline-text data-template-id="canva-inline-text-22" class="canva-text" style="color: rgba(122, 32, 32, 0.72); font-family: &quot;Dancing Script&quot;; font-size: 16px;">✨ Ai sẽ nhận được giấy chứng nhận? ✨</canva-inline-text><br data-html-import-id="html-import-108">
+      <span style="font-size: 14px; opacity: 0.7; color: rgba(122, 32, 32, 0.72);" data-html-import-id="html-import-109" data-template-id="span-23" class="canva-text">Mở bình chọn lúc nửa đêm nay...</span>
+    </div>
+    <div class="countdown-box" data-html-import-id="html-import-110">
+      <div class="countdown-label canva-container" data-html-import-id="html-import-111" data-template-id="div-24" style="color: rgba(255, 255, 255, 0.65); font-weight: 700; font-size: 10px;">⏳ Đếm ngược mở vote</div>
+      <div class="countdown-time" data-html-import-id="html-import-112">
+        <div class="cd-block" data-html-import-id="html-import-113"><div class="cd-num canva-container" id="hh" data-html-import-id="html-import-114" data-template-id="div-25" style="font-family: &quot;Playfair Display&quot;; font-weight: 700; font-size: 46px;">09</div><div class="cd-unit canva-container" data-html-import-id="html-import-115" data-template-id="div-26" style="color: rgba(255, 255, 255, 0.55); font-weight: 700; font-size: 8px;">Giờ</div></div>
+        <div class="cd-sep canva-container" data-html-import-id="html-import-116" data-template-id="div-27" style="color: rgba(255, 255, 255, 0.45); font-family: &quot;Playfair Display&quot;; font-size: 42px;">:</div>
+        <div class="cd-block" data-html-import-id="html-import-117"><div class="cd-num canva-container" id="mm" data-html-import-id="html-import-118" data-template-id="div-28" style="font-family: &quot;Playfair Display&quot;; font-weight: 700; font-size: 46px;">48</div><div class="cd-unit canva-container" data-html-import-id="html-import-119" data-template-id="div-29" style="color: rgba(255, 255, 255, 0.55); font-weight: 700; font-size: 8px;">Phút</div></div>
+        <div class="cd-sep canva-container" data-html-import-id="html-import-120" data-template-id="div-30" style="color: rgba(255, 255, 255, 0.45); font-family: &quot;Playfair Display&quot;; font-size: 42px;">:</div>
+        <div class="cd-block" data-html-import-id="html-import-121"><div class="cd-num canva-container" id="ss" data-html-import-id="html-import-122" data-template-id="div-31" style="font-family: &quot;Playfair Display&quot;; font-weight: 700; font-size: 46px;">02</div><div class="cd-unit canva-container" data-html-import-id="html-import-123" data-template-id="div-32" style="color: rgba(255, 255, 255, 0.55); font-weight: 700; font-size: 8px;">Giây</div></div>
+      </div>
+      <div class="midnight-tag canva-container" data-html-import-id="html-import-124" data-template-id="div-33" style="background: rgba(255, 255, 255, 0.13);"><span data-html-import-id="html-import-125" data-template-id="span-34" class="canva-text" style="color: rgba(255, 255, 255, 0.88); font-weight: 700; font-size: 10px;">🌙 12:00 AM · ĐÊM NAY</span></div>
+    </div>
+    <div class="bottom-orn" data-html-import-id="html-import-126">
+      <div class="orn-line" style="width:28px" data-html-import-id="html-import-127"></div>
+      <div class="bottom-orn-text canva-container" data-html-import-id="html-import-128" data-template-id="div-35" style="color: rgba(122, 32, 32, 0.45); font-weight: 700; font-size: 9px;">Stay tuned</div>
+      <div class="orn-line" style="width:28px" data-html-import-id="html-import-129"></div>
+    </div>
+  </div>
+
+</div>
+<script data-html-import-id="html-import-130">
+function pad(n){ return String(n).padStart(2,'0'); }
+function tick(){
+  const now=new Date(), mid=new Date();
+  mid.setHours(24,0,0,0);
+  const d=Math.max(0,mid-now);
+  document.getElementById('hh').textContent=pad(Math.floor(d/3600000));
+  document.getElementById('mm').textContent=pad(Math.floor((d%3600000)/60000));
+  document.getElementById('ss').textContent=pad(Math.floor((d%60000)/1000));
+}
+tick(); setInterval(tick,1000);
+</script>
+
+
+<script src="/_sdk/editing_sdk.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a004ac631f36219a',t:'MTc3OTU0NTczMw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>
